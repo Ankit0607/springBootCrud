@@ -16,28 +16,37 @@ public class bookService {
 		list.add(new book(11, "C++", "Krishna"));
 		list.add(new book(10, "Python", "Ankit"));
 	}
-	
-	public List<book>getAllBook(){
+
+	// Get all the books
+	public List<book> getAllBook() {
 		return this.list;
 	}
-	
-	public book getBookById(int id){
-		book book = list.stream().filter(e->e.getBookID() == id).findFirst().get();
+
+	// Get single book by Id
+	public book getBookById(int id) {
+		book book = null;
+		try {
+			book = list.stream().filter(e -> e.getBookID() == id).findFirst().get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return book;
 	}
-	
+
+	// Add a new book
 	public void createBook(book b) {
 		list.add(b);
 	}
-	
+
+	// delete an existing book
 	public void deleteBook(int id) {
-		list = list.stream().filter(e->e.getBookID() != id).collect(Collectors.toList());
+		list = list.stream().filter(e -> e.getBookID() != id).collect(Collectors.toList());
 	}
-	
-	//updating the existing book detail
+
+	// updating the existing book detail
 	public void updateBook(book book, int id) {
-		list = list.stream().map(e->{
-			if(e.getBookID() == id) {
+		list = list.stream().map(e -> {
+			if (e.getBookID() == id) {
 				e.setBokName(book.getBokName());
 				e.setAuthor(book.getAuthor());
 			}

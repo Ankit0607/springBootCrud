@@ -24,4 +24,8 @@ public class bookService {
 		book book = list.stream().filter(e->e.getBookID() == id).findFirst().get();
 		return book;
 	}
+	
+	public void createBook(book b) {
+		list.add(b);
+	}
 }

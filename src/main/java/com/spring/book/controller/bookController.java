@@ -73,8 +73,10 @@ public class bookController {
 	@PutMapping("/books/{id}")
 	public ResponseEntity<book> updateBook(@RequestBody book book, @PathVariable("id") int id) {
 		try {
-			bookService.updateBook(book, id);
-			return ResponseEntity.ok().body(book);
+			book bk = bookService.updateBook(book, id);
+			if (bk == null)
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			return ResponseEntity.of(Optional.of(book));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}

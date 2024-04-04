@@ -2,6 +2,7 @@ package com.spring.book.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -27,5 +28,9 @@ public class bookService {
 	
 	public void createBook(book b) {
 		list.add(b);
+	}
+	
+	public void deleteBook(int id) {
+		list = list.stream().filter(e->e.getBookID() != id).collect(Collectors.toList());
 	}
 }

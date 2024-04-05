@@ -1,9 +1,11 @@
 package com.spring.book.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +18,8 @@ public class book {
 	private int bookID;
 
 	private String bokName;
-	private String author;
+	@OneToOne(cascade = CascadeType.ALL)
+	private author author;
 
 	public int getBookID() {
 		return bookID;
@@ -34,15 +37,15 @@ public class book {
 		this.bokName = bokName;
 	}
 
-	public String getAuthor() {
+	public author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(author author) {
 		this.author = author;
 	}
 
-	public book(int bookID, String bokName, String author) {
+	public book(int bookID, String bokName, author author) {
 		super();
 		this.bookID = bookID;
 		this.bokName = bokName;

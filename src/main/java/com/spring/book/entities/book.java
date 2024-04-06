@@ -1,5 +1,7 @@
 package com.spring.book.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +20,9 @@ public class book {
 	private int bookID;
 
 	private String bokName;
+
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference // used to avoid the recursion call
 	private author author;
 
 	public int getBookID() {
@@ -54,7 +58,6 @@ public class book {
 
 	public book() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 }

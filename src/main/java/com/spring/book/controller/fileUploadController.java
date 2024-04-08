@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.spring.book.helper.helper;
 
 @RestController
@@ -29,8 +31,15 @@ public class fileUploadController {
 						.body("file type must be JPEG or JPG only");
 
 			boolean f = helper.uploadFile(file);
-			if (f)
-				return ResponseEntity.ok("File Uploaded Successfully");
+
+			if (f) {
+				// return ResponseEntity.ok("File Uploaded Successfully");
+
+				// this code will return the uploaded image path to use in the fruther code to
+				// display the image
+				return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/image")
+						.path(file.getOriginalFilename()).toUriString());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
